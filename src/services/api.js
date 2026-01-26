@@ -20,16 +20,16 @@ const storage = {
 // Initialize with seed data if needed
 if (USE_LOCAL_STORAGE && typeof window !== 'undefined') {
   storage.init('gym_members', [
-    { id: 1, name: 'Carlos Rodriguez', email: 'carlos@email.com', phone: '8888-1234', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString() },
-    { id: 2, name: 'Maria Gonzalez', email: 'maria@email.com', phone: '8888-5678', membershipType: 'standard', status: 'active', joinDate: new Date().toISOString() },
-    { id: 3, name: 'Juan Perez', email: 'juan@email.com', phone: '8888-9012', membershipType: 'basic', status: 'active', joinDate: new Date().toISOString() },
-    { id: 4, name: 'Ana Martinez', email: 'ana@email.com', phone: '8888-3456', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString() }
+    { id: 1, firstName: 'Carlos', lastName: 'Rodriguez', email: 'carlos@email.com', phone: '8888-1234', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString(), expiryDate: '2026-12-31', notes: 'Premium member' },
+    { id: 2, firstName: 'Maria', lastName: 'Gonzalez', email: 'maria@email.com', phone: '8888-5678', membershipType: 'standard', status: 'active', joinDate: new Date().toISOString(), expiryDate: '2026-12-31', notes: '' },
+    { id: 3, firstName: 'Juan', lastName: 'Perez', email: 'juan@email.com', phone: '8888-9012', membershipType: 'basic', status: 'active', joinDate: new Date().toISOString(), expiryDate: '2026-12-31', notes: '' },
+    { id: 4, firstName: 'Ana', lastName: 'Martinez', email: 'ana@email.com', phone: '8888-3456', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString(), expiryDate: '2026-12-31', notes: 'VIP member' }
   ]);
   storage.init('gym_workouts', [
-    { id: 1, name: 'Morning Cardio', instructor: 'Ana Martinez', type: 'cardio', duration: 45, level: 'beginner', capacity: 20, enrolled: 15, schedule: '6:00 AM' },
-    { id: 2, name: 'Strength Training', instructor: 'Pedro Rojas', type: 'strength', duration: 60, level: 'intermediate', capacity: 15, enrolled: 12, schedule: '8:00 AM' },
-    { id: 3, name: 'Yoga Flow', instructor: 'Sofia Leon', type: 'flexibility', duration: 50, level: 'beginner', capacity: 25, enrolled: 20, schedule: '7:00 PM' },
-    { id: 4, name: 'HIIT Training', instructor: 'Carlos Vega', type: 'cardio', duration: 30, level: 'advanced', capacity: 12, enrolled: 10, schedule: '5:00 PM' }
+    { id: 1, name: 'Morning Cardio', description: 'High-energy cardio session', instructor: 'Ana Martinez', type: 'cardio', duration: 45, level: 'beginner', capacity: 20, enrolled: 15, dayOfWeek: 'Monday', startTime: '06:00', endTime: '06:45' },
+    { id: 2, name: 'Strength Training', description: 'Full-body strength workout', instructor: 'Pedro Rojas', type: 'strength', duration: 60, level: 'intermediate', capacity: 15, enrolled: 12, dayOfWeek: 'Wednesday', startTime: '08:00', endTime: '09:00' },
+    { id: 3, name: 'Yoga Flow', description: 'Relaxing yoga session', instructor: 'Sofia Leon', type: 'flexibility', duration: 50, level: 'beginner', capacity: 25, enrolled: 20, dayOfWeek: 'Tuesday', startTime: '19:00', endTime: '19:50' },
+    { id: 4, name: 'HIIT Training', description: 'High intensity interval training', instructor: 'Carlos Vega', type: 'cardio', duration: 30, level: 'advanced', capacity: 12, enrolled: 10, dayOfWeek: 'Friday', startTime: '17:00', endTime: '17:30' }
   ]);
   storage.init('gym_attendance', []);
   storage.init('gym_equipment', [
