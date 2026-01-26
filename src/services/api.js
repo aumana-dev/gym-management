@@ -1,18 +1,21 @@
 /**
  * API Service - GymFlow Backend Communication
- * Falls back to localStorage when backend is unavailable
+ * Uses localStorage for persistent demo data
  */
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
-const USE_LOCAL_STORAGE = true; // Always use localStorage for demo
+const USE_LOCAL_STORAGE = true;
+const SEED_VERSION = 'v2'; // Change this to force reseed
 
 // LocalStorage helpers
 const storage = {
   get: (key) => JSON.parse(localStorage.getItem(key) || '[]'),
   set: (key, data) => localStorage.setItem(key, JSON.stringify(data)),
   init: (key, defaultData) => {
-    if (!localStorage.getItem(key)) {
+    const versionKey = `${key}_version`;
+    const currentVersion = localStorage.getItem(versionKey);
+    if (currentVersion !== SEED_VERSION) {
       storage.set(key, defaultData);
+      localStorage.setItem(versionKey, SEED_VERSION);
     }
   }
 };
