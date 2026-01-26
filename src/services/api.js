@@ -4,7 +4,7 @@
  */
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
-const USE_LOCAL_STORAGE = !import.meta.env.VITE_API_URL;
+const USE_LOCAL_STORAGE = true; // Always use localStorage for demo
 
 // LocalStorage helpers
 const storage = {
