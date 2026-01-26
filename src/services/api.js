@@ -1,23 +1,60 @@
 /**
  * API Service - GymFlow Backend Communication
+ * Falls back to localStorage when backend is unavailable
  */
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
+const USE_LOCAL_STORAGE = !import.meta.env.VITE_API_URL;
+
+// LocalStorage helpers
+const storage = {
+  get: (key) => JSON.parse(localStorage.getItem(key) || '[]'),
+  set: (key, data) => localStorage.setItem(key, JSON.stringify(data)),
+  init: (key, defaultData) => {
+    if (!localStorage.getItem(key)) {
+      storage.set(key, defaultData);
+    }
+  }
+};
+
+// Initialize with seed data if needed
+if (USE_LOCAL_STORAGE && typeof window !== 'undefined') {
+  storage.init('gym_members', [
+    { id: 1, name: 'Carlos Rodriguez', email: 'carlos@email.com', phone: '8888-1234', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString() },
+    { id: 2, name: 'Maria Gonzalez', email: 'maria@email.com', phone: '8888-5678', membershipType: 'standard', status: 'active', joinDate: new Date().toISOString() },
+    { id: 3, name: 'Juan Perez', email: 'juan@email.com', phone: '8888-9012', membershipType: 'basic', status: 'active', joinDate: new Date().toISOString() },
+    { id: 4, name: 'Ana Martinez', email: 'ana@email.com', phone: '8888-3456', membershipType: 'premium', status: 'active', joinDate: new Date().toISOString() }
+  ]);
+  storage.init('gym_workouts', [
+    { id: 1, name: 'Morning Cardio', instructor: 'Ana Martinez', type: 'cardio', duration: 45, level: 'beginner', capacity: 20, enrolled: 15, schedule: '6:00 AM' },
+    { id: 2, name: 'Strength Training', instructor: 'Pedro Rojas', type: 'strength', duration: 60, level: 'intermediate', capacity: 15, enrolled: 12, schedule: '8:00 AM' },
+    { id: 3, name: 'Yoga Flow', instructor: 'Sofia Leon', type: 'flexibility', duration: 50, level: 'beginner', capacity: 25, enrolled: 20, schedule: '7:00 PM' },
+    { id: 4, name: 'HIIT Training', instructor: 'Carlos Vega', type: 'cardio', duration: 30, level: 'advanced', capacity: 12, enrolled: 10, schedule: '5:00 PM' }
+  ]);
+  storage.init('gym_attendance', []);
+  storage.init('gym_equipment', [
+    { id: 1, name: 'Treadmill #1', category: 'Cardio', status: 'available', lastMaintenance: new Date().toISOString() },
+    { id: 2, name: 'Bench Press', category: 'Strength', status: 'available', lastMaintenance: new Date().toISOString() },
+    { id: 3, name: 'Dumbbells Set', category: 'Strength', status: 'available', lastMaintenance: new Date().toISOString() },
+    { id: 4, name: 'Yoga Mats', category: 'Flexibility', status: 'available', lastMaintenance: new Date().toISOString() }
+  ]);
+}
 
 export const membersAPI = {
   getAll: async () => {
+    if (USE_LOCAL_STORAGE) return storage.get('gym_members');
     const res = await fetch(`${API_BASE}/members`);
     if (!res.ok) throw new Error('Failed to fetch members');
     return res.json();
   },
 
-  getById: async (id) => {
-    const res = await fetch(`${API_BASE}/members/${id}`);
-    if (!res.ok) throw new Error('Failed to fetch member');
-    return res.json();
-  },
-
   create: async (data) => {
+    if (USE_LOCAL_STORAGE) {
+      const members = storage.get('gym_members');
+      const newMember = { ...data, id: Date.now(), joinDate: new Date().toISOString() };
+      storage.set('gym_members', [newMember, ...members]);
+      return newMember;
+    }
     const res = await fetch(`${API_BASE}/members`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -28,6 +65,12 @@ export const membersAPI = {
   },
 
   update: async (id, data) => {
+    if (USE_LOCAL_STORAGE) {
+      const members = storage.get('gym_members');
+      const updated = members.map(m => m.id === id ? { ...m, ...data } : m);
+      storage.set('gym_members', updated);
+      return updated.find(m => m.id === id);
+    }
     const res = await fetch(`${API_BASE}/members/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -38,20 +81,31 @@ export const membersAPI = {
   },
 
   delete: async (id) => {
+    if (USE_LOCAL_STORAGE) {
+      const members = storage.get('gym_members').filter(m => m.id !== id);
+      storage.set('gym_members', members);
+      return;
+    }
     const res = await fetch(`${API_BASE}/members/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Failed to delete member');
-    return res.json();
   }
 };
 
 export const workoutsAPI = {
   getAll: async () => {
+    if (USE_LOCAL_STORAGE) return storage.get('gym_workouts');
     const res = await fetch(`${API_BASE}/workouts`);
     if (!res.ok) throw new Error('Failed to fetch workouts');
     return res.json();
   },
 
   create: async (data) => {
+    if (USE_LOCAL_STORAGE) {
+      const workouts = storage.get('gym_workouts');
+      const newWorkout = { ...data, id: Date.now(), enrolled: 0 };
+      storage.set('gym_workouts', [newWorkout, ...workouts]);
+      return newWorkout;
+    }
     const res = await fetch(`${API_BASE}/workouts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -62,6 +116,12 @@ export const workoutsAPI = {
   },
 
   update: async (id, data) => {
+    if (USE_LOCAL_STORAGE) {
+      const workouts = storage.get('gym_workouts');
+      const updated = workouts.map(w => w.id === id ? { ...w, ...data } : w);
+      storage.set('gym_workouts', updated);
+      return updated.find(w => w.id === id);
+    }
     const res = await fetch(`${API_BASE}/workouts/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -72,20 +132,31 @@ export const workoutsAPI = {
   },
 
   delete: async (id) => {
+    if (USE_LOCAL_STORAGE) {
+      const workouts = storage.get('gym_workouts').filter(w => w.id !== id);
+      storage.set('gym_workouts', workouts);
+      return;
+    }
     const res = await fetch(`${API_BASE}/workouts/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Failed to delete workout');
-    return res.json();
   }
 };
 
 export const attendanceAPI = {
   getAll: async () => {
+    if (USE_LOCAL_STORAGE) return storage.get('gym_attendance');
     const res = await fetch(`${API_BASE}/attendance`);
     if (!res.ok) throw new Error('Failed to fetch attendance');
     return res.json();
   },
 
   checkIn: async (memberId) => {
+    if (USE_LOCAL_STORAGE) {
+      const attendance = storage.get('gym_attendance');
+      const record = { id: Date.now(), memberId, checkIn: new Date().toISOString(), checkOut: null };
+      storage.set('gym_attendance', [record, ...attendance]);
+      return record;
+    }
     const res = await fetch(`${API_BASE}/attendance/checkin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -93,25 +164,24 @@ export const attendanceAPI = {
     });
     if (!res.ok) throw new Error('Failed to check in');
     return res.json();
-  },
-
-  checkOut: async (id) => {
-    const res = await fetch(`${API_BASE}/attendance/checkout/${id}`, {
-      method: 'POST'
-    });
-    if (!res.ok) throw new Error('Failed to check out');
-    return res.json();
   }
 };
 
 export const equipmentAPI = {
   getAll: async () => {
+    if (USE_LOCAL_STORAGE) return storage.get('gym_equipment');
     const res = await fetch(`${API_BASE}/equipment`);
     if (!res.ok) throw new Error('Failed to fetch equipment');
     return res.json();
   },
 
   create: async (data) => {
+    if (USE_LOCAL_STORAGE) {
+      const equipment = storage.get('gym_equipment');
+      const newItem = { ...data, id: Date.now(), lastMaintenance: new Date().toISOString() };
+      storage.set('gym_equipment', [newItem, ...equipment]);
+      return newItem;
+    }
     const res = await fetch(`${API_BASE}/equipment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -122,6 +192,12 @@ export const equipmentAPI = {
   },
 
   update: async (id, data) => {
+    if (USE_LOCAL_STORAGE) {
+      const equipment = storage.get('gym_equipment');
+      const updated = equipment.map(e => e.id === id ? { ...e, ...data } : e);
+      storage.set('gym_equipment', updated);
+      return updated.find(e => e.id === id);
+    }
     const res = await fetch(`${API_BASE}/equipment/${id}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
@@ -132,14 +208,32 @@ export const equipmentAPI = {
   },
 
   delete: async (id) => {
+    if (USE_LOCAL_STORAGE) {
+      const equipment = storage.get('gym_equipment').filter(e => e.id !== id);
+      storage.set('gym_equipment', equipment);
+      return;
+    }
     const res = await fetch(`${API_BASE}/equipment/${id}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Failed to delete equipment');
-    return res.json();
   }
 };
 
 export const statsAPI = {
   get: async () => {
+    if (USE_LOCAL_STORAGE) {
+      const members = storage.get('gym_members');
+      const workouts = storage.get('gym_workouts');
+      const attendance = storage.get('gym_attendance');
+      return {
+        totalMembers: members.length,
+        activeMembers: members.filter(m => m.status === 'active').length,
+        totalWorkouts: workouts.length,
+        todayAttendance: attendance.filter(a => {
+          const checkInDate = new Date(a.checkIn).toDateString();
+          return checkInDate === new Date().toDateString();
+        }).length
+      };
+    }
     const res = await fetch(`${API_BASE}/stats`);
     if (!res.ok) throw new Error('Failed to fetch stats');
     return res.json();
