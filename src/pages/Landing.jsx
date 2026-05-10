@@ -17,20 +17,20 @@ export default function Landing() {
 
   const metricas = [
     '2,300+ Coaches verificados',
-    '18 verticales profesionales',
+    '18 categorias de coaching',
     '92% de sesiones repetidas',
     'Tiempo de reserva promedio: 2.4 min',
   ];
 
   const categorias = [
-    { nombre: 'Coaching de Vida',        icono: '🌱', desc: 'Claridad, proposito y direccion personal' },
-    { nombre: 'Liderazgo Ejecutivo',      icono: '⚡', desc: 'Influencia, vision y desarrollo de equipos' },
-    { nombre: 'Productividad',            icono: '🎯', desc: 'Habitos, enfoque y alto rendimiento' },
-    { nombre: 'Emprendimiento',           icono: '🚀', desc: 'Validacion, escala y mentalidad fundadora' },
-    { nombre: 'Finanzas Personales',      icono: '💎', desc: 'Libertad financiera y decisiones inteligentes' },
-    { nombre: 'Carrera Profesional',      icono: '📈', desc: 'Crecimiento, transiciones y posicionamiento' },
-    { nombre: 'Oratoria y Comunicacion',  icono: '🎤', desc: 'Presencia, persuasion e impacto verbal' },
-    { nombre: 'Bienestar Integral',       icono: '🧘', desc: 'Energia, equilibrio y salud mental' },
+    { nombre: 'Coaching de Vida', icono: '🌱', desc: 'Claridad, proposito y direccion personal' },
+    { nombre: 'Liderazgo Ejecutivo', icono: '⚡', desc: 'Influencia, vision y desarrollo de equipos' },
+    { nombre: 'Productividad', icono: '🎯', desc: 'Habitos, enfoque y alto rendimiento' },
+    { nombre: 'Emprendimiento', icono: '🚀', desc: 'Validacion, escala y mentalidad fundadora' },
+    { nombre: 'Finanzas Personales', icono: '💎', desc: 'Libertad financiera y decisiones inteligentes' },
+    { nombre: 'Carrera Profesional', icono: '📈', desc: 'Crecimiento, transiciones y posicionamiento' },
+    { nombre: 'Oratoria y Comunicacion', icono: '🎤', desc: 'Presencia, persuasion e impacto verbal' },
+    { nombre: 'Bienestar Integral', icono: '🧘', desc: 'Energia, equilibrio y salud mental' },
   ];
 
   const pilares = [
@@ -149,7 +149,7 @@ export default function Landing() {
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mb-10 text-center">
-            <h2 className="text-3xl font-black text-white sm:text-4xl">Verticales disponibles</h2>
+            <h2 className="text-3xl font-black text-white sm:text-4xl">Categorias disponibles</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-400 sm:text-base">
               No somos solo fitness. Somos infraestructura de coaching profesional para individuos, equipos y
               organizaciones en multiples disciplinas.
