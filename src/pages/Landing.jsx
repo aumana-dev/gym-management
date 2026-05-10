@@ -23,14 +23,14 @@ export default function Landing() {
   ];
 
   const categorias = [
-    'Coaching de Vida',
-    'Liderazgo Ejecutivo',
-    'Productividad',
-    'Emprendimiento',
-    'Finanzas Personales',
-    'Carrera Profesional',
-    'Oratoria y Comunicacion',
-    'Bienestar Integral',
+    { nombre: 'Coaching de Vida',        icono: '🌱', desc: 'Claridad, proposito y direccion personal' },
+    { nombre: 'Liderazgo Ejecutivo',      icono: '⚡', desc: 'Influencia, vision y desarrollo de equipos' },
+    { nombre: 'Productividad',            icono: '🎯', desc: 'Habitos, enfoque y alto rendimiento' },
+    { nombre: 'Emprendimiento',           icono: '🚀', desc: 'Validacion, escala y mentalidad fundadora' },
+    { nombre: 'Finanzas Personales',      icono: '💎', desc: 'Libertad financiera y decisiones inteligentes' },
+    { nombre: 'Carrera Profesional',      icono: '📈', desc: 'Crecimiento, transiciones y posicionamiento' },
+    { nombre: 'Oratoria y Comunicacion',  icono: '🎤', desc: 'Presencia, persuasion e impacto verbal' },
+    { nombre: 'Bienestar Integral',       icono: '🧘', desc: 'Energia, equilibrio y salud mental' },
   ];
 
   const pilares = [
@@ -115,18 +115,60 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-14 sm:px-6">
-        <div className="rounded-3xl border border-zinc-800 bg-[#141414] p-6 sm:p-8">
-          <h2 className="text-2xl font-bold text-white sm:text-3xl">Verticales disponibles</h2>
-          <p className="mt-3 max-w-3xl text-sm text-zinc-400 sm:text-base">
-            No somos solo fitness. Somos infraestructura de coaching profesional para individuos, equipos y
-            organizaciones en multiples disciplinas.
-          </p>
+      <style>{`
+        @keyframes floatA {
+          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.18; }
+          33% { transform: translateY(-28px) translateX(12px); opacity: 0.28; }
+          66% { transform: translateY(14px) translateX(-8px); opacity: 0.14; }
+        }
+        @keyframes floatB {
+          0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.12; }
+          40% { transform: translateY(22px) translateX(-18px); opacity: 0.22; }
+          70% { transform: translateY(-12px) translateX(10px); opacity: 0.08; }
+        }
+        @keyframes floatC {
+          0%, 100% { transform: translateY(0px); opacity: 0.10; }
+          50% { transform: translateY(-20px); opacity: 0.20; }
+        }
+        .orb-a { animation: floatA 9s ease-in-out infinite; }
+        .orb-b { animation: floatB 13s ease-in-out infinite; }
+        .orb-c { animation: floatC 7s ease-in-out infinite; }
+        .cat-card:hover .cat-icon { transform: scale(1.18) rotate(-4deg); }
+        .cat-icon { transition: transform 0.3s ease; display: inline-block; }
+      `}</style>
 
-          <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {categorias.map((categoria) => (
-              <div key={categoria} className="rounded-xl border border-zinc-800 bg-[#0F0F0F] px-4 py-3 text-sm font-semibold text-zinc-200 transition hover:border-[#06B6D4]/70 hover:text-[#06B6D4]">
-                {categoria}
+      <section className="relative overflow-hidden py-16">
+        {/* animated background */}
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,rgba(6,182,212,0.13),transparent_70%)]" />
+        <div className="pointer-events-none absolute inset-0 [background-image:linear-gradient(to_right,rgba(39,39,42,0.18)_1px,transparent_1px),linear-gradient(to_bottom,rgba(39,39,42,0.18)_1px,transparent_1px)] [background-size:44px_44px]" />
+        {/* floating orbs */}
+        <div className="orb-a pointer-events-none absolute left-[8%] top-[14%] h-64 w-64 rounded-full bg-cyan-500/20 blur-[80px]" />
+        <div className="orb-b pointer-events-none absolute right-[6%] top-[30%] h-80 w-80 rounded-full bg-sky-600/15 blur-[100px]" />
+        <div className="orb-c pointer-events-none absolute bottom-[10%] left-[40%] h-52 w-52 rounded-full bg-teal-400/10 blur-[70px]" />
+        <div className="orb-a pointer-events-none absolute right-[30%] top-[5%] h-36 w-36 rounded-full bg-cyan-300/10 blur-[50px]" />
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+          <div className="mb-10 text-center">
+            <h2 className="text-3xl font-black text-white sm:text-4xl">Verticales disponibles</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm text-zinc-400 sm:text-base">
+              No somos solo fitness. Somos infraestructura de coaching profesional para individuos, equipos y
+              organizaciones en multiples disciplinas.
+            </p>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {categorias.map((cat) => (
+              <div
+                key={cat.nombre}
+                className="cat-card group relative cursor-default overflow-hidden rounded-2xl border border-zinc-800/80 bg-[#111]/80 p-5 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#06B6D4]/50 hover:shadow-[0_0_28px_rgba(6,182,212,0.18)]"
+              >
+                {/* card inner glow on hover */}
+                <div className="pointer-events-none absolute inset-0 rounded-2xl bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.10),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                <div className="relative">
+                  <span className="cat-icon text-3xl">{cat.icono}</span>
+                  <h3 className="mt-3 text-sm font-bold text-white">{cat.nombre}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-zinc-500 group-hover:text-zinc-400">{cat.desc}</p>
+                </div>
               </div>
             ))}
           </div>
