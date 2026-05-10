@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: gymflow-api
+    name: coachme-api
     env: node
     plan: free
     buildCommand: npm install && npx prisma generate && npx prisma db push

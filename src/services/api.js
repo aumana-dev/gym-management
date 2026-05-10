@@ -1,5 +1,5 @@
 /**
- * API Service - GymFlow Backend Communication
+ * API Service - CoachMe backend communication
  * Uses localStorage for persistent demo data
  */
 

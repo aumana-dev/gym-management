@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🏋️ Seeding GymFlow database...');
+  console.log('🏋️ Seeding CoachMe database...');
 
   // Clear existing data
   await prisma.attendance.deleteMany();

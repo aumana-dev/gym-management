@@ -1,6 +1,6 @@
 /**
- * GymFlow - Backend Server
- * Express + Prisma API for Gym Management
+ * CoachMe - Backend Server
+ * Express + Prisma API for CoachMe management
  */
 import 'dotenv/config';
 import express from 'express';
@@ -247,10 +247,10 @@ app.get('/api/stats', async (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'GymFlow API' });
+  res.json({ status: 'ok', service: 'CoachMe API' });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🏋️ GymFlow API running on port ${PORT}`);
+  console.log(`🏋️ CoachMe API running on port ${PORT}`);
 });

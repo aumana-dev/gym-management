@@ -1,4 +1,4 @@
-# 🏋️ GymFlow - Gym Management System
+# 🏋️  CoachMe - Find Your Perfect Coach
 
 Professional gym management application with member tracking, workout scheduling, and capacity monitoring.
 
