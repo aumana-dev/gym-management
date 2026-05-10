@@ -1,12 +1,12 @@
-import { Link, useNavigate } from 'react-router-dom';
+﻿import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 
 function Logo() {
   return (
     <p className="text-2xl font-black tracking-tight">
-      <span className="text-white">Coach</span>
-      <span className="text-[#22C55E]">Me</span>
+      <span className="text-white">Find</span>
+      <span className="text-[#06B6D4]">Coach</span>
     </p>
   );
 }
@@ -34,16 +34,16 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => navigate('/entrenador')}
-              className="rounded-xl px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:text-[#22C55E]"
+              className="rounded-xl px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:text-[#06B6D4]"
             >
-              Para Coaches
+              Para coaches
             </button>
             <button
               type="button"
               onClick={() => navigate('/cliente')}
-              className="rounded-xl bg-[#22C55E] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[#3ee478]"
+              className="rounded-xl bg-[#06B6D4] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[#22D3EE]"
             >
-              Comenzar
+              Explorar
             </button>
           </nav>
         )}
@@ -55,20 +55,20 @@ export default function Navbar() {
               onClick={() => navigate('/cliente')}
               className="rounded-xl px-3 py-2 text-sm font-medium text-zinc-200 transition hover:bg-zinc-900"
             >
-              Explorar
+              Descubrir
             </button>
             <button
               type="button"
               onClick={() => navigate('/cliente/dashboard')}
               className="rounded-xl px-3 py-2 text-sm font-medium text-zinc-200 transition hover:bg-zinc-900"
             >
-              Mis Reservas
+              Mis sesiones
             </button>
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setOpenMenu((prev) => !prev)}
-                className="flex items-center gap-2 rounded-full border border-zinc-700 bg-[#1A1A1A] px-2 py-1 text-sm text-zinc-200 transition hover:border-[#22C55E]"
+                className="flex items-center gap-2 rounded-full border border-zinc-700 bg-[#1A1A1A] px-2 py-1 text-sm text-zinc-200 transition hover:border-[#06B6D4]"
               >
                 <img src={usuarioActual?.foto} alt="avatar" className="h-8 w-8 rounded-full object-cover" />
                 <span className="hidden sm:inline">{usuarioActual?.nombre?.split(' ')[0]}</span>
@@ -80,7 +80,7 @@ export default function Navbar() {
                     onClick={irALanding}
                     className="w-full rounded-lg px-3 py-2 text-left text-zinc-200 transition hover:bg-zinc-800"
                   >
-                    Cerrar sesión demo
+                    Cerrar sesion demo
                   </button>
                 </div>
               )}
@@ -92,15 +92,15 @@ export default function Navbar() {
           <nav className="flex items-center gap-3">
             <button
               type="button"
-              className="rounded-full border border-zinc-700 p-2 text-zinc-200 transition hover:border-[#22C55E] hover:text-[#22C55E]"
+              className="rounded-full border border-zinc-700 px-3 py-2 text-xs font-semibold text-zinc-200 transition hover:border-[#06B6D4] hover:text-[#06B6D4]"
             >
-              🔔
+              Notifs
             </button>
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setOpenMenu((prev) => !prev)}
-                className="flex items-center gap-2 rounded-full border border-zinc-700 bg-[#1A1A1A] px-2 py-1 text-sm text-zinc-200 transition hover:border-[#22C55E]"
+                className="flex items-center gap-2 rounded-full border border-zinc-700 bg-[#1A1A1A] px-2 py-1 text-sm text-zinc-200 transition hover:border-[#06B6D4]"
               >
                 <img src={usuarioActual?.foto} alt="coach" className="h-8 w-8 rounded-full object-cover" />
                 <span className="hidden sm:inline">Coach</span>

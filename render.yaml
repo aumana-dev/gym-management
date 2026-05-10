@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: coachme-api
+    name: findcoach-api
     env: node
     plan: free
     buildCommand: npm install && npx prisma generate && npx prisma db push
@@ -10,3 +10,4 @@ services:
         sync: false
       - key: NODE_ENV
         value: production
+

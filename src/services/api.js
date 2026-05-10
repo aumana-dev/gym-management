@@ -1,5 +1,5 @@
 /**
- * API Service - CoachMe backend communication
+ * API Service - FindCoach backend communication
  * Uses localStorage for persistent demo data
  */
 
@@ -242,3 +242,5 @@ export const statsAPI = {
     return res.json();
   }
 };
+
+

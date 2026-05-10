@@ -7,11 +7,12 @@ export default {
         coach: {
           bg: '#0F0F0F',
           card: '#1A1A1A',
-          accent: '#22C55E',
+          accent: '#06B6D4',
         },
       },
     },
   },
   plugins: [],
 }
+
 

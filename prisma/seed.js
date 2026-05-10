@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
-  console.log('🏋️ Seeding CoachMe database...');
+  console.log('🏋️ Seeding FindCoach database...');
 
   // Clear existing data
   await prisma.attendance.deleteMany();
@@ -258,3 +258,4 @@ main()
   .finally(async () => {
     await prisma.$disconnect();
   });
+

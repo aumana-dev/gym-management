@@ -1,6 +1,6 @@
 /**
- * CoachMe - Backend Server
- * Express + Prisma API for CoachMe management
+ * FindCoach - Backend Server
+ * Express + Prisma API for FindCoach management
  */
 import 'dotenv/config';
 import express from 'express';
@@ -247,10 +247,11 @@ app.get('/api/stats', async (req, res) => {
 
 // Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'CoachMe API' });
+  res.json({ status: 'ok', service: 'FindCoach API' });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`🏋️ CoachMe API running on port ${PORT}`);
+  console.log(`🏋️ FindCoach API running on port ${PORT}`);
 });
+

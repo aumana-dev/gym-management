@@ -34,7 +34,7 @@ export default function DetalleEntrenador({ entrenador, onClose }) {
         <button
           type="button"
           onClick={onClose}
-          className="mb-4 rounded-full border border-zinc-700 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-300 transition hover:border-[#22C55E] hover:text-[#22C55E]"
+          className="mb-4 rounded-full border border-zinc-700 px-4 py-2 text-xs font-semibold uppercase tracking-wide text-zinc-300 transition hover:border-[#06B6D4] hover:text-[#06B6D4]"
         >
           Cerrar
         </button>
@@ -49,14 +49,14 @@ export default function DetalleEntrenador({ entrenador, onClose }) {
           <div>
             <div className="flex flex-wrap items-center gap-3">
               <h2 className="text-2xl font-bold text-white">{entrenador.nombre}</h2>
-              <span className="rounded-full border border-[#22C55E]/50 bg-[#22C55E]/10 px-3 py-1 text-xs font-semibold text-[#22C55E]">
+              <span className="rounded-full border border-[#06B6D4]/50 bg-[#06B6D4]/10 px-3 py-1 text-xs font-semibold text-[#06B6D4]">
                 {entrenador.especialidad}
               </span>
             </div>
 
             <div className="mt-2 flex items-center gap-2 text-sm text-zinc-300">
               {stars(entrenador.calificacion).map((active, index) => (
-                <span key={index} className={active ? 'text-[#22C55E]' : 'text-zinc-600'}>
+                <span key={index} className={active ? 'text-[#06B6D4]' : 'text-zinc-600'}>
                   ★
                 </span>
               ))}
@@ -91,8 +91,8 @@ export default function DetalleEntrenador({ entrenador, onClose }) {
                     type="button"
                     onClick={() => setSlotSeleccionado(slot)}
                     className={`rounded-xl border px-3 py-2 text-left text-sm transition ${selected
-                        ? 'border-[#22C55E] bg-[#22C55E]/15 text-[#22C55E]'
-                        : 'border-zinc-700 bg-[#0F0F0F] text-zinc-200 hover:border-[#22C55E]/60 hover:text-[#22C55E]'
+                        ? 'border-[#06B6D4] bg-[#06B6D4]/15 text-[#06B6D4]'
+                        : 'border-zinc-700 bg-[#0F0F0F] text-zinc-200 hover:border-[#06B6D4]/60 hover:text-[#06B6D4]'
                       }`}
                   >
                     <p className="font-semibold">{slot.dia}</p>
@@ -111,7 +111,7 @@ export default function DetalleEntrenador({ entrenador, onClose }) {
                 type="button"
                 onClick={reservar}
                 disabled={!slotSeleccionado}
-                className="rounded-xl bg-[#22C55E] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#3ee478] disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-300"
+                className="rounded-xl bg-[#06B6D4] px-5 py-3 text-sm font-semibold text-black transition hover:bg-[#22D3EE] disabled:cursor-not-allowed disabled:bg-zinc-700 disabled:text-zinc-300"
               >
                 Confirmar Reserva
               </button>
@@ -122,3 +122,4 @@ export default function DetalleEntrenador({ entrenador, onClose }) {
     </div>
   );
 }
+

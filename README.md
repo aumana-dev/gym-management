@@ -1,14 +1,14 @@
-# 🏋️  CoachMe - Find Your Perfect Coach
+# FindCoach - La red profesional de coaching
 
-Professional gym management application with member tracking, workout scheduling, and capacity monitoring.
+Plataforma que conecta personas y empresas con coaches de alto nivel en liderazgo, carrera, bienestar, finanzas, comunicacion, productividad y mas.
 
-## 🚀 Features
+## Caracteristicas
 
-- **👥 Member Management**: Add, edit, and track gym members with membership types
-- **🏃 Workout Scheduling**: Create and manage workout classes with instructors
-- **📊 Dashboard Analytics**: Real-time stats on occupancy, check-ins, and members
-- **📅 Attendance Tracking**: Monitor check-ins and check-outs
-- **🔧 Equipment Management**: Track gym equipment and maintenance schedules
+- **Descubrimiento de coaches**: Busca y filtra por especialidad, ubicacion y disponibilidad
+- **Reservas en tiempo real**: Selecciona horario y confirma sesiones en segundos
+- **Dashboard cliente**: Seguimiento de sesiones, racha activa y proximas reservas
+- **Panel coach**: Gestion de agenda, clientes, perfil publico y ganancias
+- **18 verticales de coaching**: Vida, liderazgo, carrera, finanzas, productividad y mas
 
 ## 🛠️ Tech Stack
 
@@ -25,17 +25,17 @@ Professional gym management application with member tracking, workout scheduling
 ## 📁 Project Structure
 
 ```
-gym-management/
+findcoach/
 ├── src/
-│   ├── components/ui/    # Reusable UI components
-│   ├── hooks/            # Custom React hooks
-│   ├── services/         # API communication
-│   ├── App.jsx           # Main application
-│   └── index.css         # Styles
+│   ├── components/       # Navbar, DetalleEntrenador
+│   ├── context/          # AppContext (estado global)
+│   ├── data/             # mockData.js (coaches y clientes demo)
+│   ├── pages/            # Landing, ClientView, ClientDashboard, TrainerView
+│   └── services/         # api.js (comunicacion backend)
 ├── prisma/
-│   ├── schema.prisma     # Database schema
-│   └── seed.js           # Sample data
-├── server.js             # Express backend
+│   ├── schema.prisma
+│   └── seed.js
+├── server.js
 └── package.json
 ```
 
@@ -64,3 +64,4 @@ npm run dev       # Frontend (port 5174)
 ## 📄 License
 
 MIT License
+

@@ -1,4 +1,4 @@
-name: Deploy CoachMe to GitHub Pages
+name: Deploy FindCoach to GitHub Pages
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -57,3 +57,4 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+

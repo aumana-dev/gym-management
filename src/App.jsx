@@ -16,7 +16,7 @@ function Toasts() {
         <div
           key={toast.id}
           className={`rounded-xl border px-4 py-3 text-sm font-semibold shadow-lg ${toast.type === 'success'
-              ? 'border-[#22C55E]/50 bg-[#14301f] text-[#89f7ad]'
+              ? 'border-[#06B6D4]/50 bg-[#14301f] text-[#67E8F9]'
               : 'border-zinc-700 bg-zinc-900 text-zinc-200'
             }`}
         >
@@ -75,3 +75,5 @@ function App() {
 }
 
 export default App;
+
+

@@ -1,27 +1,36 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import DetalleEntrenador from '../components/DetalleEntrenador';
 import { useAppContext } from '../context/AppContext';
 
-const filtros = ['Todos', 'Pérdida de Peso', 'Fuerza', 'HIIT', 'Yoga', 'Boxeo'];
+const filtros = [
+  'Todos',
+  'Coaching de Vida',
+  'Liderazgo Ejecutivo',
+  'Productividad y Habitos',
+  'Carrera Profesional',
+  'Finanzas Personales',
+  'Emprendimiento',
+  'Bienestar Integral',
+];
 
 function TarjetaEntrenador({ entrenador, onSeleccionar }) {
   return (
     <article
       onClick={() => onSeleccionar(entrenador)}
-      className="group cursor-pointer rounded-2xl border border-zinc-800 bg-[#1A1A1A] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#22C55E]/70"
+      className="group cursor-pointer rounded-2xl border border-zinc-800 bg-[#1A1A1A] p-4 transition duration-300 hover:-translate-y-1 hover:border-[#06B6D4]/70"
     >
       <div className="flex items-start gap-4">
         <img src={entrenador.foto} alt={entrenador.nombre} className="h-20 w-20 rounded-xl object-cover" />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-lg font-bold text-white">{entrenador.nombre}</h3>
-            <span className="rounded-full bg-[#22C55E]/15 px-3 py-1 text-xs font-semibold text-[#22C55E]">
+            <span className="rounded-full bg-[#06B6D4]/15 px-3 py-1 text-xs font-semibold text-[#06B6D4]">
               {entrenador.especialidad}
             </span>
           </div>
           <p className="mt-1 text-sm text-zinc-400">{entrenador.ubicacion}</p>
           <div className="mt-2 flex items-center gap-2 text-sm">
-            <span className="font-semibold text-[#22C55E]">★ {entrenador.calificacion.toFixed(1)}</span>
+            <span className="font-semibold text-[#06B6D4]">★ {entrenador.calificacion.toFixed(1)}</span>
             <span className="text-zinc-500">({entrenador.cantidadResenas})</span>
           </div>
         </div>
@@ -33,10 +42,7 @@ function TarjetaEntrenador({ entrenador, onSeleccionar }) {
           <p className="text-xl font-bold text-white">${entrenador.precioPorSesion}</p>
         </div>
         <div className="text-right">
-          <p
-            className={`text-xs font-semibold ${entrenador.disponible ? 'text-[#22C55E]' : 'text-zinc-500'
-              }`}
-          >
+          <p className={`text-xs font-semibold ${entrenador.disponible ? 'text-[#06B6D4]' : 'text-zinc-500'}`}>
             {entrenador.disponible ? 'Disponible ahora' : 'Sin disponibilidad inmediata'}
           </p>
           <p className="text-xs text-zinc-500">{entrenador.viendoAhora} personas viendo este coach</p>
@@ -45,9 +51,9 @@ function TarjetaEntrenador({ entrenador, onSeleccionar }) {
 
       <button
         type="button"
-        className="mt-4 w-full rounded-xl bg-[#22C55E] py-3 text-sm font-bold text-black transition group-hover:bg-[#3ee478]"
+        className="mt-4 w-full rounded-xl bg-[#06B6D4] py-3 text-sm font-bold text-black transition group-hover:bg-[#22D3EE]"
       >
-        Reservar Sesión
+        Reservar sesion
       </button>
     </article>
   );
@@ -90,7 +96,7 @@ export default function ClientView() {
               value={query}
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Buscar coach por nombre, ciudad o especialidad"
-              className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#22C55E] md:max-w-lg"
+              className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#06B6D4] md:max-w-lg"
             />
             <p className="text-sm text-zinc-500">{resultados.length} coaches encontrados</p>
           </div>
@@ -101,10 +107,11 @@ export default function ClientView() {
                 key={item}
                 type="button"
                 onClick={() => setFiltro(item)}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${filtro === item
-                  ? 'bg-[#22C55E] text-black'
-                  : 'border border-zinc-700 bg-[#0F0F0F] text-zinc-300 hover:border-[#22C55E]/60 hover:text-[#22C55E]'
-                  }`}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${
+                  filtro === item
+                    ? 'bg-[#06B6D4] text-black'
+                    : 'border border-zinc-700 bg-[#0F0F0F] text-zinc-300 hover:border-[#06B6D4]/60 hover:text-[#06B6D4]'
+                }`}
               >
                 {item}
               </button>
@@ -119,9 +126,7 @@ export default function ClientView() {
         </div>
       </div>
 
-      {modalOpen && (
-        <DetalleEntrenador entrenador={entrenadorSeleccionado} onClose={cerrarDetalle} />
-      )}
+      {modalOpen && <DetalleEntrenador entrenador={entrenadorSeleccionado} onClose={cerrarDetalle} />}
     </div>
   );
 }

@@ -1,10 +1,9 @@
-import { useMemo, useState } from 'react';
+﻿import { useMemo, useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 
 const tabs = ['Dashboard', 'Mi Perfil', 'Agenda', 'Mis Clientes', 'Ganancias'];
-
 const hours = Array.from({ length: 13 }, (_, index) => `${index + 8}:00`);
-const weekDays = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+const weekDays = ['Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab', 'Dom'];
 
 const initialSchedule = weekDays.reduce((acc, day) => {
   acc[day] = hours.map((hour, index) => {
@@ -21,10 +20,10 @@ export default function TrainerView() {
   const [agenda, setAgenda] = useState(initialSchedule);
   const [profile, setProfile] = useState({
     nombre: usuarioActual?.nombre ?? 'Coach Demo',
-    especialidad: usuarioActual?.especialidad ?? 'Fuerza',
+    especialidad: usuarioActual?.especialidad ?? 'Liderazgo Ejecutivo',
     biografia:
       usuarioActual?.biografia ??
-      'Coach orientado a resultados con seguimiento cercano y sesiones personalizadas.',
+      'Coach orientado a resultados con seguimiento cercano y sesiones personalizadas para metas profesionales.',
     precioPorSesion: usuarioActual?.precioPorSesion ?? 80,
     foto: usuarioActual?.foto ?? 'https://i.pravatar.cc/150?img=2',
   });
@@ -40,9 +39,9 @@ export default function TrainerView() {
   }, [reservas, usuarioActual, clientes]);
 
   const pagosRecientes = [
-    { id: 1, fecha: '09 May', cliente: 'Laura Méndez', monto: 60, estado: 'Pagado' },
-    { id: 2, fecha: '08 May', cliente: 'Paula Estrada', monto: 85, estado: 'Pagado' },
-    { id: 3, fecha: '07 May', cliente: 'Carlos Ibarra', monto: 70, estado: 'Pagado' },
+    { id: 1, fecha: '09 May', cliente: 'Laura Mendez', monto: 65, estado: 'Pagado' },
+    { id: 2, fecha: '08 May', cliente: 'Paula Estrada', monto: 110, estado: 'Pagado' },
+    { id: 3, fecha: '07 May', cliente: 'Carlos Ibarra', monto: 90, estado: 'Pagado' },
   ];
 
   const monthlyRevenue = [320, 410, 380, 520, 600, 550, 700, 680];
@@ -77,10 +76,11 @@ export default function TrainerView() {
                 key={tab}
                 type="button"
                 onClick={() => setActiveTab(tab)}
-                className={`w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition ${activeTab === tab
-                    ? 'bg-[#22C55E] text-black'
-                    : 'border border-zinc-700 text-zinc-200 hover:border-[#22C55E]/60 hover:text-[#22C55E]'
-                  }`}
+                className={`w-full rounded-xl px-4 py-3 text-left text-sm font-semibold transition ${
+                  activeTab === tab
+                    ? 'bg-[#06B6D4] text-black'
+                    : 'border border-zinc-700 text-zinc-200 hover:border-[#06B6D4]/60 hover:text-[#06B6D4]'
+                }`}
               >
                 {tab}
               </button>
@@ -93,10 +93,10 @@ export default function TrainerView() {
             <section className="space-y-6">
               <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                 {[
-                  ['Total Clientes', 48],
-                  ['Sesiones Este Mes', 76],
-                  ['Calificación', '4.9'],
-                  ['Ganancias Totales', '$12,840'],
+                  ['Total clientes', 48],
+                  ['Sesiones este mes', 76],
+                  ['Calificacion', '4.9'],
+                  ['Ganancias totales', '$12,840'],
                 ].map(([title, value]) => (
                   <article key={title} className="rounded-2xl border border-zinc-800 bg-[#1A1A1A] p-5">
                     <p className="text-sm text-zinc-400">{title}</p>
@@ -110,12 +110,17 @@ export default function TrainerView() {
                   <h2 className="text-xl font-bold text-white">Sesiones de hoy</h2>
                   <div className="mt-4 space-y-3">
                     {reservasDeHoy.map((session) => (
-                      <div key={session.id} className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#0F0F0F] p-3">
+                      <div
+                        key={session.id}
+                        className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#0F0F0F] p-3"
+                      >
                         <div>
                           <p className="font-semibold text-white">{session.cliente?.nombre}</p>
-                          <p className="text-xs text-zinc-500">{session.hora} · Objetivo: {session.cliente?.objetivo}</p>
+                          <p className="text-xs text-zinc-500">
+                            {session.hora} · Objetivo: {session.cliente?.objetivo}
+                          </p>
                         </div>
-                        <span className="rounded-full bg-[#22C55E]/10 px-3 py-1 text-xs font-semibold text-[#22C55E]">
+                        <span className="rounded-full bg-[#06B6D4]/10 px-3 py-1 text-xs font-semibold text-[#06B6D4]">
                           Confirmada
                         </span>
                       </div>
@@ -130,7 +135,7 @@ export default function TrainerView() {
                       <div key={index} className="flex flex-1 flex-col items-center gap-2">
                         <div
                           style={{ height: `${value / 8}px` }}
-                          className="w-full rounded-t-lg bg-[#22C55E]/80 transition hover:bg-[#3ee478]"
+                          className="w-full rounded-t-lg bg-[#06B6D4]/80 transition hover:bg-[#22D3EE]"
                         />
                       </div>
                     ))}
@@ -139,11 +144,11 @@ export default function TrainerView() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {['Nueva sesión', 'Enviar mensaje', 'Actualizar disponibilidad'].map((action) => (
+                {['Nueva sesion', 'Enviar mensaje', 'Actualizar disponibilidad'].map((action) => (
                   <button
                     key={action}
                     type="button"
-                    className="rounded-xl border border-zinc-700 bg-[#1A1A1A] px-4 py-3 text-sm font-semibold text-zinc-200 transition hover:border-[#22C55E] hover:text-[#22C55E]"
+                    className="rounded-xl border border-zinc-700 bg-[#1A1A1A] px-4 py-3 text-sm font-semibold text-zinc-200 transition hover:border-[#06B6D4] hover:text-[#06B6D4]"
                   >
                     {action}
                   </button>
@@ -160,7 +165,7 @@ export default function TrainerView() {
                   {[
                     ['nombre', 'Nombre', 'text'],
                     ['especialidad', 'Especialidad', 'text'],
-                    ['precioPorSesion', 'Precio por sesión', 'number'],
+                    ['precioPorSesion', 'Precio por sesion', 'number'],
                     ['foto', 'URL de foto', 'text'],
                   ].map(([key, label, type]) => (
                     <label key={key} className="block">
@@ -169,41 +174,41 @@ export default function TrainerView() {
                         type={type}
                         value={profile[key]}
                         onChange={(event) => setProfile((prev) => ({ ...prev, [key]: event.target.value }))}
-                        className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#22C55E]"
+                        className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#06B6D4]"
                       />
                     </label>
                   ))}
 
                   <label className="block">
-                    <span className="mb-1 block text-sm text-zinc-400">Biografía</span>
+                    <span className="mb-1 block text-sm text-zinc-400">Biografia</span>
                     <textarea
                       rows={5}
                       value={profile.biografia}
                       onChange={(event) => setProfile((prev) => ({ ...prev, biografia: event.target.value }))}
-                      className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#22C55E]"
+                      className="w-full rounded-xl border border-zinc-700 bg-[#0F0F0F] px-4 py-3 text-sm text-white outline-none transition focus:border-[#06B6D4]"
                     />
                   </label>
                 </div>
 
                 <button
                   type="submit"
-                  className="mt-5 rounded-xl bg-[#22C55E] px-6 py-3 text-sm font-bold text-black transition hover:bg-[#3ee478]"
+                  className="mt-5 rounded-xl bg-[#06B6D4] px-6 py-3 text-sm font-bold text-black transition hover:bg-[#22D3EE]"
                 >
                   Guardar cambios
                 </button>
               </form>
 
               <article className="rounded-2xl border border-zinc-800 bg-[#1A1A1A] p-5">
-                <h3 className="text-lg font-bold text-white">Vista previa pública</h3>
+                <h3 className="text-lg font-bold text-white">Vista previa publica</h3>
                 <div className="mt-4 rounded-xl border border-zinc-800 bg-[#0F0F0F] p-4">
                   <img src={profile.foto} alt={profile.nombre} className="h-44 w-full rounded-xl object-cover" />
                   <p className="mt-4 text-xl font-bold text-white">{profile.nombre}</p>
-                  <p className="mt-1 text-sm text-[#22C55E]">{profile.especialidad}</p>
+                  <p className="mt-1 text-sm text-[#06B6D4]">{profile.especialidad}</p>
                   <p className="mt-3 text-sm text-zinc-300">{profile.biografia}</p>
-                  <p className="mt-4 text-sm text-zinc-400">Desde ${profile.precioPorSesion}/sesión</p>
+                  <p className="mt-4 text-sm text-zinc-400">Desde ${profile.precioPorSesion}/sesion</p>
                 </div>
                 <p className="mt-3 text-xs text-zinc-500">
-                  Rating actual: {coachPreview.calificacion} · {coachPreview.cantidadResenas} reseñas
+                  Rating actual: {coachPreview.calificacion} · {coachPreview.cantidadResenas} resenas
                 </p>
               </article>
             </section>
@@ -212,7 +217,7 @@ export default function TrainerView() {
           {activeTab === 'Agenda' && (
             <section className="rounded-2xl border border-zinc-800 bg-[#1A1A1A] p-5">
               <h2 className="text-xl font-bold text-white">Agenda semanal (8am - 8pm)</h2>
-              <p className="mt-2 text-xs text-zinc-500">Verde = disponible · Gris = no disponible · Azul = reservado</p>
+              <p className="mt-2 text-xs text-zinc-500">Cian = disponible · Gris = no disponible · Azul = reservado</p>
               <div className="mt-5 overflow-x-auto">
                 <div className="min-w-[760px] space-y-2">
                   <div className="grid grid-cols-[80px_repeat(7,minmax(80px,1fr))] gap-2">
@@ -230,18 +235,19 @@ export default function TrainerView() {
                         const state = agenda[day][rowIndex];
                         const color =
                           state === 'available'
-                            ? 'bg-[#22C55E]/35 border-[#22C55E]/80'
+                            ? 'bg-[#06B6D4]/35 border-[#06B6D4]/80'
                             : state === 'reserved'
-                              ? 'bg-sky-500/30 border-sky-400/60'
-                              : 'bg-zinc-700/40 border-zinc-700';
+                            ? 'bg-sky-500/30 border-sky-400/60'
+                            : 'bg-zinc-700/40 border-zinc-700';
                         return (
                           <button
                             key={`${day}-${hour}`}
                             type="button"
                             disabled={state === 'reserved'}
                             onClick={() => toggleSlot(day, rowIndex)}
-                            className={`h-9 rounded-lg border text-xs transition ${color} ${state === 'reserved' ? 'cursor-not-allowed opacity-90' : 'hover:brightness-110'
-                              }`}
+                            className={`h-9 rounded-lg border text-xs transition ${color} ${
+                              state === 'reserved' ? 'cursor-not-allowed opacity-90' : 'hover:brightness-110'
+                            }`}
                           >
                             {state === 'reserved' ? 'Reservado' : state === 'available' ? 'Libre' : 'Off'}
                           </button>
@@ -272,11 +278,11 @@ export default function TrainerView() {
                         </div>
                         <div className="text-right text-xs text-zinc-500">
                           <p>{client.sesionesCompletadas} sesiones</p>
-                          <p>Última sesión: 0{(index % 8) + 1}/05/2026</p>
+                          <p>Ultima sesion: 0{(index % 8) + 1}/05/2026</p>
                         </div>
                       </div>
                       <div className="mt-3 h-2 rounded-full bg-zinc-800">
-                        <div style={{ width: `${progress}%` }} className="h-2 rounded-full bg-[#22C55E]" />
+                        <div style={{ width: `${progress}%` }} className="h-2 rounded-full bg-[#06B6D4]" />
                       </div>
                     </article>
                   );
@@ -307,13 +313,16 @@ export default function TrainerView() {
                 <h2 className="text-xl font-bold text-white">Pagos recientes</h2>
                 <div className="mt-4 space-y-3">
                   {pagosRecientes.map((pago) => (
-                    <div key={pago.id} className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#0F0F0F] p-3">
+                    <div
+                      key={pago.id}
+                      className="flex items-center justify-between rounded-xl border border-zinc-800 bg-[#0F0F0F] p-3"
+                    >
                       <div>
                         <p className="font-semibold text-white">{pago.cliente}</p>
                         <p className="text-xs text-zinc-500">{pago.fecha}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-semibold text-[#22C55E]">${pago.monto}</p>
+                        <p className="font-semibold text-[#06B6D4]">${pago.monto}</p>
                         <p className="text-xs text-zinc-500">{pago.estado}</p>
                       </div>
                     </div>
