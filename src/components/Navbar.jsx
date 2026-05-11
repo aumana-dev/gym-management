@@ -25,16 +25,10 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className={
-        isLanding
-          ? 'sticky top-0 z-40 border-b border-black/[0.06] bg-white/90 backdrop-blur'
-          : 'sticky top-0 z-40 border-b border-zinc-800 bg-[#0F0F0F]/95 backdrop-blur'
-      }
-    >
+    <header className="sticky top-0 z-40 border-b border-zinc-800/60 bg-[#1A1A1A]/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
         <Link to="/" onClick={irALanding}>
-          <Logo light={isLanding} />
+          <Logo light={false} />
         </Link>
 
         {isLanding && (
@@ -42,7 +36,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => navigate('/entrenador')}
-              className="rounded-xl px-4 py-2 text-sm font-semibold text-[#6E6E73] transition hover:text-[#06B6D4]"
+              className="rounded-xl px-4 py-2 text-sm font-semibold text-zinc-400 transition hover:text-[#06B6D4]"
             >
               Para coaches
             </button>

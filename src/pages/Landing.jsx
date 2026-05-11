@@ -28,17 +28,14 @@ export default function Landing() {
 
   const pilares = [
     {
-      icono: '🔍',
       titulo: 'Matching inteligente',
       texto: 'Conectamos cada objetivo con coaches especializados segun etapa, presupuesto y estilo de acompanamiento.',
     },
     {
-      icono: '✅',
       titulo: 'Experiencia confiable',
       texto: 'Perfiles validados, resenas reales y metodologia clara para tomar decisiones con alta confianza.',
     },
     {
-      icono: '📊',
       titulo: 'Seguimiento accionable',
       texto: 'Cada sesion aterriza en proximos pasos medibles para convertir conversaciones en resultados concretos.',
     },
@@ -99,13 +96,13 @@ export default function Landing() {
       </section>
 
       {/* ── WHY FINDCOACH ── */}
-      <section className="bg-[#F5F5F7] py-24">
+      <section className="bg-[#111] py-24">
         <div className="mx-auto max-w-7xl px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-4xl font-black tracking-tight text-[#1D1D1F] sm:text-5xl">
+            <h2 className="text-4xl font-black tracking-tight text-white sm:text-5xl">
               Por que FindCoach
             </h2>
-            <p className="mt-4 text-lg text-[#6E6E73]">
+            <p className="mt-4 text-lg text-zinc-400">
               Disenamos una experiencia para que encuentres al coach ideal sin ruido, con informacion clara.
             </p>
           </div>
@@ -113,13 +110,11 @@ export default function Landing() {
             {pilares.map((p) => (
               <article
                 key={p.titulo}
-                className="rounded-3xl bg-white p-8 shadow-sm ring-1 ring-black/[0.06] transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+                className="rounded-3xl border border-zinc-800 bg-[#1A1A1A] p-8 transition duration-300 hover:-translate-y-1 hover:border-[#06B6D4]/30"
               >
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#06B6D4]/10 text-2xl">
-                  {p.icono}
-                </div>
-                <h3 className="mt-6 text-xl font-bold text-[#1D1D1F]">{p.titulo}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-[#6E6E73]">{p.texto}</p>
+                <div className="h-[3px] w-10 rounded-full bg-[#06B6D4]" />
+                <h3 className="mt-6 text-xl font-bold text-white">{p.titulo}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-zinc-400">{p.texto}</p>
               </article>
             ))}
           </div>
@@ -157,11 +152,8 @@ export default function Landing() {
         <div className="mx-auto max-w-7xl px-6">
           <div className="grid gap-6 md:grid-cols-2">
             <article className="rounded-3xl bg-white p-10 shadow-sm ring-1 ring-black/[0.06]">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#06B6D4]/10 text-2xl">
-                🎯
-              </div>
-              <h3 className="mt-6 text-2xl font-bold text-[#1D1D1F]">Para personas y equipos</h3>
-              <ul className="mt-5 space-y-3">
+              <h3 className="text-2xl font-bold text-[#1D1D1F]">Para personas y equipos</h3>
+              <ul className="mt-6 space-y-3">
                 {[
                   'Encuentra coaches por objetivo, industria y estilo de acompanamiento.',
                   'Reserva sesiones en minutos con horarios claros y precios transparentes.',
@@ -183,11 +175,8 @@ export default function Landing() {
             </article>
 
             <article className="rounded-3xl bg-white p-10 shadow-sm ring-1 ring-black/[0.06]">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#06B6D4]/10 text-2xl">
-                💼
-              </div>
-              <h3 className="mt-6 text-2xl font-bold text-[#1D1D1F]">Para coaches profesionales</h3>
-              <ul className="mt-5 space-y-3">
+              <h3 className="text-2xl font-bold text-[#1D1D1F]">Para coaches profesionales</h3>
+              <ul className="mt-6 space-y-3">
                 {[
                   'Crea un perfil solido y muestra tu metodologia de forma clara.',
                   'Gestiona agenda, clientes y ganancias desde un solo panel.',
