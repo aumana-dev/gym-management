@@ -2,10 +2,10 @@
 import { useState } from 'react';
 import { useAppContext } from '../context/AppContext';
 
-function Logo() {
+function Logo({ light }) {
   return (
     <p className="text-2xl font-black tracking-tight">
-      <span className="text-white">Find</span>
+      <span className={light ? 'text-[#1D1D1F]' : 'text-white'}>Find</span>
       <span className="text-[#06B6D4]">Coach</span>
     </p>
   );
@@ -16,6 +16,8 @@ export default function Navbar() {
   const { vistaActual, usuarioActual, setRol } = useAppContext();
   const [openMenu, setOpenMenu] = useState(false);
 
+  const isLanding = vistaActual === 'landing';
+
   const irALanding = () => {
     setRol('landing');
     navigate('/');
@@ -23,25 +25,31 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-zinc-800 bg-[#0F0F0F]/95 backdrop-blur">
+    <header
+      className={
+        isLanding
+          ? 'sticky top-0 z-40 border-b border-black/[0.06] bg-white/90 backdrop-blur'
+          : 'sticky top-0 z-40 border-b border-zinc-800 bg-[#0F0F0F]/95 backdrop-blur'
+      }
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6">
         <Link to="/" onClick={irALanding}>
-          <Logo />
+          <Logo light={isLanding} />
         </Link>
 
-        {vistaActual === 'landing' && (
+        {isLanding && (
           <nav className="flex items-center gap-2 sm:gap-4">
             <button
               type="button"
               onClick={() => navigate('/entrenador')}
-              className="rounded-xl px-4 py-2 text-sm font-semibold text-zinc-200 transition hover:text-[#06B6D4]"
+              className="rounded-xl px-4 py-2 text-sm font-semibold text-[#6E6E73] transition hover:text-[#06B6D4]"
             >
               Para coaches
             </button>
             <button
               type="button"
               onClick={() => navigate('/cliente')}
-              className="rounded-xl bg-[#06B6D4] px-4 py-2 text-sm font-semibold text-black transition hover:bg-[#22D3EE]"
+              className="rounded-xl bg-[#06B6D4] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#0EA5E9]"
             >
               Explorar
             </button>
